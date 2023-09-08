@@ -1,4 +1,4 @@
-package schamber.gestionuniversidad.AccesoADatos;
+package grupo41.AccesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
