@@ -76,7 +76,8 @@ public class Alumno {
     public void setEstadoA(boolean estadoA) {
         this.estadoA = estadoA;
     }
-    
+
+
     
 
     @Override
