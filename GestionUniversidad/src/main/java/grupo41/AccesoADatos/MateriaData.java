@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class MateriaData {
@@ -51,12 +53,61 @@ public class MateriaData {
  }
  
  public void modificarMateria(Materia materia){
-     
-     
+     String sqlModificar= "update materia set  nombre=?, anio=? where idMateria=?";
+            try {
+                PreparedStatement ps= con.prepareStatement(sqlModificar);
+                ps.setString(1, materia.getNombre());
+                ps.setInt(2, materia.getAnioMateria());
+                ps.setInt(3, materia.getIdMateria());
+                int exito = ps.executeUpdate();
+                if(exito==1){
+                JOptionPane.showMessageDialog(null, "materia modificada correctamente");
+            }
+                
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, "error al acceder a la tabla materia");
+            }
  }
  
  
-        
-        
+ public void eliminarMateria(int id){
+     String sqlEliminar = "update materia set estado= 0 where idMateria = ?";
+       PreparedStatement ps;
+            try {
+                ps = con.prepareStatement(sqlEliminar);
+                 ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+              if(exito==1){
+                JOptionPane.showMessageDialog(null, "materia eliminada");
+            }
+              
+            } catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, "error al acceder a la tabla materia");
+            }
+ }
+ 
+ public List<Materia>ListarMaterias(){
+         String Listasql = "SELECT  IdMateria ,  nombre ,  anio  FROM  materia  WHERE estado=1";
+         ArrayList<Materia> materias = new ArrayList<>();
+         
+         try {
+           PreparedStatement ps = con.prepareStatement(Listasql);
+            ResultSet rs =ps.executeQuery();
+            
+            while (rs.next()){
+                Materia materia= new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnioMateria(rs.getInt("anio"));
+                materias.add(materia);
+            }
+            ps.close();
+            
+          } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla alumno");
+        }
+        return materias;
+     }
+
         
 }
