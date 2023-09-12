@@ -122,11 +122,10 @@ public class InscripcionData {
          return materias;
          }
     
-    // corregir string sql 
-         
+           
              public List<Materia> ListaMateriasNoCursadas() {
         List<Materia> materias = new ArrayList<Materia>();
-        String ListaSql = "select * materia from materia join inscripción on (materia.idmateria = inscripción.idmateria) ";
+        String ListaSql = "select * materia from materia join inscripción on (materia.idmateria = inscripción.idmateria) WHERE inscripción.idmateria IS NULL ";
         try {
             PreparedStatement ps = con.prepareStatement(ListaSql);
             ResultSet rs = ps.executeQuery();
