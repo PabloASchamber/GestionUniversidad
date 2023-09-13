@@ -121,15 +121,16 @@ public class InscripcionData {
          }
     
            
-    public List<Materia> ListaMateriasNoCursadas() {
-        List<Materia> materias = new ArrayList<Materia>();
-        String ListaSql = "select * from materia join inscripcion on (materia.idmateria = inscripcion.idmateria) WHERE inscripcion.idmateria IS NULL ";
+    public List<Materia> ListaMateriasNoCursadas(int id) {
+      List<Materia>materias=new ArrayList<Materia>(); 
+             String ListaSql="select * from materia where estado=1 and idMateria not in (select idmateria from inscripcion where idalumno =?)" ;
         try {
             PreparedStatement ps = con.prepareStatement(ListaSql);
-            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
             Materia materia;
-            while (rs.next()) {
-                materia = new Materia();
+            while(rs.next()){
+                materia= new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
@@ -139,7 +140,7 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla inscripcion");
         }
-        return materias;
+         return materias;
     }
 
             
@@ -188,6 +189,12 @@ public class InscripcionData {
             ps.setInt(1, idMateria);
             ResultSet rs=ps.executeQuery();
             Alumno nombre = aldat.buscarAlumno(rs.getInt("IdAlumno"));
+            nombre.setApellido(rs.getString("apellido"));
+            nombre.setNombre(rs.getString("nombre"));
+            nombre.setDni(rs.getInt("dni"));
+            nombre.setFechanac(rs.getDate("fechaNacimiento").toLocalDate());
+            nombre.setIdAlumno(rs.getInt("idAlumno"));
+            
             AlumnosXmateria.add(nombre);
             ps.close();
         } catch (SQLException ex) {
