@@ -34,12 +34,13 @@ public class ConexionBD {
         return cx;
     }
     
-    public void desconectar() {
+    public static Connection desconectar() {
         try {
             cx.close();
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
+           return cx;
     }
 
 }
