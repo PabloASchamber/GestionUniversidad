@@ -153,6 +153,8 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_jMI_FormularioAlumnosActionPerformed
 
     private void jMenu_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_SalirMouseClicked
+    System.exit(0);
+    
     
     }//GEN-LAST:event_jMenu_SalirMouseClicked
 
@@ -189,10 +191,7 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_JMI_AlumnosxMateriaActionPerformed
 
     private void jMenu_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_SalirActionPerformed
-        ConexionBD.desconectar();
-        fondo.removeAll();
-        
-        System.exit(0);
+
     }//GEN-LAST:event_jMenu_SalirActionPerformed
 
     /**
