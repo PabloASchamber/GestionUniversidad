@@ -4,6 +4,9 @@
  */
 package grupo41.Vistas;
 
+import grupo41.AccesoADatos.MateriaData;
+import grupo41.Entidades.Materia;
+
 /**
  *
  * @author Pablo
@@ -49,6 +52,11 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jB_buscar.setText("Buscar");
+        jB_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_buscarMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("nombre");
 
@@ -63,12 +71,37 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jB_nuevo.setText("Nuevo");
+        jB_nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_nuevoMouseClicked(evt);
+            }
+        });
 
         jB_eliminar.setText("Eliminar");
+        jB_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_eliminarMouseClicked(evt);
+            }
+        });
 
         jB_Guardar.setText("Guardar");
+        jB_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_GuardarMouseClicked(evt);
+            }
+        });
 
         jB_salir.setText("salir");
+        jB_salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_salirMouseClicked(evt);
+            }
+        });
+        jB_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_salirActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Materia");
 
@@ -149,6 +182,43 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
     private void jRB_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRB_estadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRB_estadoActionPerformed
+
+    private void jB_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_nuevoMouseClicked
+        jRB_estado.setSelected(false);
+        jTF_nombre.setText("");
+        jTF_anio.setText("");
+        jT_codigo.setText("");
+    }//GEN-LAST:event_jB_nuevoMouseClicked
+
+    private void jB_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_buscarMouseClicked
+        MateriaData matdat= new MateriaData();
+        Materia mat=matdat.buscarMateria(Integer.parseInt(jT_codigo.getText()));
+        jRB_estado.setSelected(true);
+        jTF_nombre.setText(mat.getNombre());
+        jTF_anio.setText(Integer.toString(mat.getAnioMateria()));
+    }//GEN-LAST:event_jB_buscarMouseClicked
+
+    private void jB_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_GuardarMouseClicked
+        MateriaData matdat=new MateriaData();
+        String nombre = jTF_nombre.getText();
+        Integer anio = Integer.parseInt(jTF_anio.getText());
+        boolean estado = jRB_estado.isSelected();
+        Materia mat = new Materia(anio, nombre, estado);
+        matdat.GuardarMateria(mat);
+    }//GEN-LAST:event_jB_GuardarMouseClicked
+
+    private void jB_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_salirMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_salirMouseClicked
+
+    private void jB_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jB_salirActionPerformed
+
+    private void jB_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_eliminarMouseClicked
+         MateriaData matdat=new MateriaData();
+        matdat.eliminarMateria(Integer.parseInt(jT_codigo.getText()));
+    }//GEN-LAST:event_jB_eliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
