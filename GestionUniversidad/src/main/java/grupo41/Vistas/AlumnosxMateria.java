@@ -66,6 +66,11 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jB_Salir.setText("Salir");
+        jB_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_SalirMouseClicked(evt);
+            }
+        });
         jB_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_SalirActionPerformed(evt);
@@ -115,6 +120,10 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_SalirMouseClicked
+        dispose();
+    }//GEN-LAST:event_jB_SalirMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

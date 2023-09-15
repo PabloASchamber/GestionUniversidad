@@ -88,6 +88,11 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         jB_anularInsc.setText("Anular inscripcion");
 
         jB_salir.setText("Salir");
+        jB_salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_salirMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +159,10 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private void jCB_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCB_alumnosActionPerformed
+
+    private void jB_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_salirMouseClicked
+         dispose();
+    }//GEN-LAST:event_jB_salirMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

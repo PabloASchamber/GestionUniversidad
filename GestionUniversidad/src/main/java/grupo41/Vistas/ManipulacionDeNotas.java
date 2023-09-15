@@ -4,6 +4,8 @@
  */
 package grupo41.Vistas;
 
+import grupo41.AccesoADatos.InscripcionData;
+
 /**
  *
  * @author Pablo
@@ -67,6 +69,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jB_Guardar.setText("Guardar");
+        jB_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_GuardarMouseClicked(evt);
+            }
+        });
 
         jB_Salir.setText("Salir");
         jB_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -93,13 +100,13 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
-                                        .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
+                        .addGap(100, 100, 100)
                         .addComponent(jB_Guardar)
-                        .addGap(201, 201, 201)
+                        .addGap(229, 229, 229)
                         .addComponent(jB_Salir)))
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,21 +117,26 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Guardar)
                     .addComponent(jB_Salir))
-                .addGap(215, 215, 215))
+                .addGap(117, 117, 117))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jB_SalirActionPerformed
+
+    private void jB_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_GuardarMouseClicked
+       InscripcionData indat=new InscripcionData();
+       
+    }//GEN-LAST:event_jB_GuardarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
