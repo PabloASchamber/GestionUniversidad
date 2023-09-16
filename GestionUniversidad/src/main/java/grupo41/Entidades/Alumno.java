@@ -77,14 +77,15 @@ public class Alumno {
         this.estadoA = estadoA;
     }
 
-
-    
-
     @Override
     public String toString() {
-        return "Alumno{" + "IdAlumno=" + IdAlumno + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido +  '}';
+        return "Alumno{" +  ", nombre=" + nombre + ", apellido=" + apellido + "dni=" + dni + '}';
     }
+
+
     
+
+  
     
     
 }

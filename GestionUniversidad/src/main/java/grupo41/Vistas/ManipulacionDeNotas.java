@@ -4,7 +4,10 @@
  */
 package grupo41.Vistas;
 
+import grupo41.AccesoADatos.AlumnoData;
 import grupo41.AccesoADatos.InscripcionData;
+import grupo41.Entidades.Alumno;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,8 +40,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jLabel1.setText("Carga de notas");
 
         jLabel2.setText("seleccione un alumno");
-
-        jCB_alumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,12 +138,20 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
        InscripcionData indat=new InscripcionData();
        
     }//GEN-LAST:event_jB_GuardarMouseClicked
+private void CargarCombo(){
+    AlumnoData aldat = new AlumnoData();
+     ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
+     for (Alumno alumno : alumnos) {
+        Alumno al = new Alumno(alumno.getDni(), alumno.getNombre(), alumno.getApellido(), alumno.getFechanac(), alumno.isEstadoA());
+       jCB_alumno.addItem(al);
+    }
 
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Guardar;
     private javax.swing.JButton jB_Salir;
-    private javax.swing.JComboBox<String> jCB_alumno;
+    private javax.swing.JComboBox<Alumno> jCB_alumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

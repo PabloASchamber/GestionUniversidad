@@ -19,13 +19,21 @@ public class MateriaData {
     }
     
  public void GuardarMateria(Materia materia){
-     String sqlMateria="INSERT INTO materia (Nombre, anio, estado) VALUES (?, ?, ?)";
+     String sqlMateria="INSERT INTO materia (nombre, anio, estado) VALUES (?, ?, ?)";
             try {
                 PreparedStatement ps = con.prepareStatement(sqlMateria, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, materia.getNombre());
                 ps.setInt(2, materia.getAnioMateria());
                 ps.setBoolean(3, true);
-                
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+                if(rs.next()){
+                    materia.setIdMateria(rs.getInt(1));
+              JOptionPane.showMessageDialog(null, "materia agregada correctamente");
+            }else{
+                    JOptionPane.showMessageDialog(null, "error al agregar la materia");
+                }
+            ps.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "error al acceder a la tabla materia");
             }
@@ -39,9 +47,10 @@ public class MateriaData {
                 ps.setInt(1, id);
                 ResultSet rs =ps.executeQuery();
                 if(rs.next()){
+                    materia =new Materia();
                     materia.setNombre(rs.getString("nombre"));
                     materia.setAnioMateria(rs.getInt("anio"));
-                    materia.setEstadoM(true);
+                    materia.setEstadoM(rs.getBoolean("estado"));
                 } else{
                 JOptionPane.showMessageDialog(null, "no existe esa materia");
             } 
