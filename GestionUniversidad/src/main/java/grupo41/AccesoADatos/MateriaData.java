@@ -48,6 +48,7 @@ public class MateriaData {
                 ResultSet rs =ps.executeQuery();
                 if(rs.next()){
                     materia =new Materia();
+                    materia.setIdMateria(id);
                     materia.setNombre(rs.getString("nombre"));
                     materia.setAnioMateria(rs.getInt("anio"));
                     materia.setEstadoM(rs.getBoolean("estado"));
