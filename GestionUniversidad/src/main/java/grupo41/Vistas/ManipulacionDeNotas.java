@@ -4,7 +4,9 @@ package grupo41.Vistas;
 import grupo41.AccesoADatos.AlumnoData;
 import grupo41.AccesoADatos.InscripcionData;
 import grupo41.Entidades.Alumno;
+import grupo41.Entidades.Inscripcion;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
@@ -12,8 +14,9 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     public ManipulacionDeNotas() {
         initComponents();
         CargarCombo();
+        armarTabla();
     }
-
+private DefaultTableModel modelo =new DefaultTableModel();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -23,7 +26,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jCB_alumno = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jB_Guardar = new javax.swing.JButton();
         jB_Salir = new javax.swing.JButton();
 
@@ -31,33 +34,17 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("seleccione un alumno");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nombre", "Nota"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        jCB_alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_alumnoActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+
+        jTable.setAutoCreateRowSorter(true);
+        jTable.setModel(modelo);
+        jTable.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(jTable);
+        jTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jB_Guardar.setText("Guardar");
         jB_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,14 +113,44 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jB_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_GuardarMouseClicked
        InscripcionData indat=new InscripcionData();
-       
+       //indat.ActualizarNota();
     }//GEN-LAST:event_jB_GuardarMouseClicked
+
+    private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
+    if(jCB_alumno.getSelectedItem()!=null){
+    Alumno alumno= (Alumno) jCB_alumno.getSelectedItem();
+     cargarDatos(alumno);
+    }
+    
+    }//GEN-LAST:event_jCB_alumnoActionPerformed
 private void CargarCombo(){
     AlumnoData aldat = new AlumnoData();
      ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
      for (Alumno alumno : alumnos) {
          System.out.println(alumno);
        jCB_alumno.addItem(alumno);
+    }
+}
+private void armarTabla(){
+    modelo.addColumn("Codigo");
+    modelo.addColumn("nombre");
+    modelo.addColumn("Nota");
+    jTable.setModel(modelo);
+}
+        
+
+private void cargarDatos(Alumno alumno){
+    InscripcionData indat =new InscripcionData();
+        if(alumno!=null){
+    ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
+    for (Inscripcion inscripcion : Inscripciones) {
+    System.out.println("ID Inscripción: " + inscripcion.getIdInscripcion());
+    System.out.println("Nombre Materia: " + inscripcion.getMateria().getNombre());
+    System.out.println("Nota: " + inscripcion.getNota());
+        modelo.addRow(new Object []{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+        jTable.validate();
+        jTable.repaint();
+    }
     }
 }
 
@@ -145,6 +162,6 @@ private void CargarCombo(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

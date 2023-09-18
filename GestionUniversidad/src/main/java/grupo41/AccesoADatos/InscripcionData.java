@@ -70,10 +70,11 @@ public class InscripcionData {
     
     
     public List<Inscripcion> listaInscripcionesPorAlumno(int id) {
-        List<Inscripcion> inscripcion = new ArrayList<Inscripcion>();
-        String ListaSql = "select * from  inscripcion where IdAlumno=?";
+        ArrayList<Inscripcion> inscripcion = new ArrayList<Inscripcion>();
+        String ListaSql = "SELECT * FROM `inscripcion` WHERE idAlumno =1; ";
         AlumnoData aldat = new AlumnoData();
         MateriaData matdat = new MateriaData();
+        Inscripcion insc=new Inscripcion();
 
         try {
             PreparedStatement ps = con.prepareStatement(ListaSql);
@@ -81,10 +82,9 @@ public class InscripcionData {
             ps = con.prepareStatement(ListaSql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Alumno nombre = aldat.buscarAlumno(rs.getInt("IdAlumno"));
+                Alumno nombre = aldat.buscarAlumno(id);
                 Materia materia = matdat.buscarMateria(rs.getInt("idMateria"));
-                Inscripcion insc=new Inscripcion();
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                insc.setIdInscripcion(rs.getInt("idInscripto"));
                 insc.setAlumno(nombre);
                 insc.setMateria(materia);
                 insc.setNota(rs.getDouble("nota"));
