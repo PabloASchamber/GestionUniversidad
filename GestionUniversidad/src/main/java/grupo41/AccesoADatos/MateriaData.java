@@ -40,7 +40,7 @@ public class MateriaData {
  }    
     
  public Materia buscarMateria(int id){
-       String sqlBuscar="select nombre, anio from materia where idMateria=? and estado=1";
+       String sqlBuscar="select *  from materia where idMateria=? and estado=1";
        Materia materia= null;   
             try {
                 PreparedStatement ps = con.prepareStatement(sqlBuscar);
@@ -48,10 +48,14 @@ public class MateriaData {
                 ResultSet rs =ps.executeQuery();
                 if(rs.next()){
                     materia =new Materia();
-                    materia.setIdMateria(id);
+                    materia.setIdMateria(rs.getInt("idMateria"));
+                    System.out.println(materia.getIdMateria());
                     materia.setNombre(rs.getString("nombre"));
+                    System.out.println(materia.getNombre());
                     materia.setAnioMateria(rs.getInt("anio"));
+                    System.out.println(materia.getAnioMateria());
                     materia.setEstadoM(rs.getBoolean("estado"));
+                    System.out.println(materia.isEstadoM());
                 } else{
                 JOptionPane.showMessageDialog(null, "no existe esa materia");
             } 
