@@ -219,7 +219,7 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
 
     private void jB_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarActionPerformed
         MateriaData matdat= new MateriaData();
-        Integer id= Integer.parseInt(jT_codigo.getText());
+        Integer id= Integer.valueOf(jT_codigo.getText().trim());
         Materia mat=matdat.buscarMateria(id);
         jRB_estado.setSelected(true);
         jTF_nombre.setText(mat.getNombre());
