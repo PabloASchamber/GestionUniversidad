@@ -4,6 +4,10 @@
  */
 package grupo41.Vistas;
 
+import grupo41.AccesoADatos.AlumnoData;
+import grupo41.Entidades.Alumno;
+import java.util.ArrayList;
+
 /**
  *
  * @author Pablo
@@ -15,6 +19,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
      */
     public ManejoInscripciones() {
         initComponents();
+        cargarCombo ();
     }
 
     /**
@@ -40,7 +45,6 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
         jLabel2.setText("selecciones un alumno");
 
-        jCB_alumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCB_alumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCB_alumnosActionPerformed(evt);
@@ -164,12 +168,28 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
          dispose();
     }//GEN-LAST:event_jB_salirMouseClicked
 
+    
+    
+    
+     private void cargarCombo (){
+        
+        AlumnoData aldat= new AlumnoData ();
+        ArrayList <Alumno> alumnos = (ArrayList <Alumno>) aldat.ListarAlumno();
+        for (Alumno alumno: alumnos){
+            System.out.println(alumno);
+            jCB_alumnos.addItem(alumno);
+            
+            
+        }
+     }
+            
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_anularInsc;
     private javax.swing.JButton jB_inscribir;
     private javax.swing.JButton jB_salir;
-    private javax.swing.JComboBox<String> jCB_alumnos;
+    private javax.swing.JComboBox<Alumno> jCB_alumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
