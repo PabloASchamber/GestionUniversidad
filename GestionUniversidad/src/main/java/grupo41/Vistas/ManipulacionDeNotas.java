@@ -16,7 +16,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         CargarCombo();
         armarTabla();
     }
-private DefaultTableModel modelo =new DefaultTableModel();
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -25,10 +25,10 @@ private DefaultTableModel modelo =new DefaultTableModel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jCB_alumno = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
         jB_Guardar = new javax.swing.JButton();
         jB_Salir = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         jLabel1.setText("Carga de notas");
 
@@ -39,12 +39,6 @@ private DefaultTableModel modelo =new DefaultTableModel();
                 jCB_alumnoActionPerformed(evt);
             }
         });
-
-        jTable.setAutoCreateRowSorter(true);
-        jTable.setModel(modelo);
-        jTable.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(jTable);
-        jTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jB_Guardar.setText("Guardar");
         jB_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -60,6 +54,27 @@ private DefaultTableModel modelo =new DefaultTableModel();
             }
         });
 
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "codigo", "nombre", "Nota"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,23 +83,23 @@ private DefaultTableModel modelo =new DefaultTableModel();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(73, 73, 73)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(73, 73, 73)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jB_Guardar)
-                        .addGap(229, 229, 229)
-                        .addComponent(jB_Salir)))
-                .addContainerGap(268, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jB_Guardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jB_Salir)))))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,9 +110,9 @@ private DefaultTableModel modelo =new DefaultTableModel();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jCB_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(78, 78, 78)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Guardar)
                     .addComponent(jB_Salir))
@@ -120,6 +135,7 @@ private DefaultTableModel modelo =new DefaultTableModel();
     if(jCB_alumno.getSelectedItem()!=null){
     Alumno alumno= (Alumno) jCB_alumno.getSelectedItem();
      cargarDatos(alumno);
+        System.out.println(alumno);
     }
     
     }//GEN-LAST:event_jCB_alumnoActionPerformed
@@ -127,10 +143,10 @@ private void CargarCombo(){
     AlumnoData aldat = new AlumnoData();
      ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
      for (Alumno alumno : alumnos) {
-         System.out.println(alumno);
        jCB_alumno.addItem(alumno);
     }
 }
+private DefaultTableModel modelo =new DefaultTableModel();
 private void armarTabla(){
     modelo.addColumn("Codigo");
     modelo.addColumn("nombre");
@@ -140,9 +156,8 @@ private void armarTabla(){
         
 
 private void cargarDatos(Alumno alumno){
-         jTable.getModel();
+          jTable.getModel();
          modelo.setRowCount(0);
-         jTable.repaint();
     InscripcionData indat =new InscripcionData();
         if(alumno!=null){
     ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
@@ -150,6 +165,7 @@ private void cargarDatos(Alumno alumno){
     for (Inscripcion inscripcion : Inscripciones) {
         modelo.addRow(new Object []{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
     }
+    jTable.repaint();
     }
 }
 
@@ -160,7 +176,7 @@ private void cargarDatos(Alumno alumno){
     private javax.swing.JComboBox<Alumno> jCB_alumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }
