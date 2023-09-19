@@ -4,6 +4,10 @@
  */
 package grupo41.Vistas;
 
+import grupo41.AccesoADatos.MateriaData;
+import grupo41.Entidades.Materia;
+import java.util.ArrayList;
+
 /**
  *
  * @author Pablo
@@ -15,6 +19,7 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
      */
     public AlumnosxMateria() {
         initComponents();
+        cargarCombo ();
     }
 
     /**
@@ -26,7 +31,7 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcb_materia = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jB_Salir = new javax.swing.JButton();
@@ -35,7 +40,7 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
 
         jLabel2.setText("seleccione una materia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_materia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,7 +97,7 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
                                 .addGap(62, 62, 62)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jcb_materia, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addComponent(jB_Salir)))
@@ -106,7 +111,7 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_materia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102)
@@ -125,13 +130,25 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jB_SalirMouseClicked
 
+    
+    
+    private void cargarCombo (){
+        
+        MateriaData matdat= new MateriaData ();
+        ArrayList <Materia> materias = (ArrayList <Materia>) matdat.ListarMaterias();
+        for (Materia materia: materias){
+            System.out.println(materia);
+            jcb_materia.addItem(materia);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Salir;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jcb_materia;
     // End of variables declaration//GEN-END:variables
 }
