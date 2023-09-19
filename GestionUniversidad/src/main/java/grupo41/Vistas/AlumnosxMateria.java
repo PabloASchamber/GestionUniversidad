@@ -174,15 +174,17 @@ public class AlumnosxMateria extends javax.swing.JInternalFrame {
     }
 
     public void cargarDatos(Materia materia) {
-        
+         jTable1.getModel();
+         modelo.setRowCount(0);
+         jTable1.repaint();
         InscripcionData indat= new InscripcionData ();
         if (materia != null) {
            List <Alumno> alumnos= indat.alumnosXmateria(materia.getIdMateria());
            
          for (Alumno alumno: alumnos){
               modelo.addRow(new Object []{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()}); 
+
          }
-   
            
         }
         

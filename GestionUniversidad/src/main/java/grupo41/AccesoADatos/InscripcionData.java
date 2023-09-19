@@ -82,10 +82,10 @@ public class InscripcionData {
             ps = con.prepareStatement(ListaSql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Alumno nombre = aldat.buscarAlumno(id);
+                Alumno alumno = aldat.buscarAlumno(id);
                 Materia materia = matdat.buscarMateria(rs.getInt("idMateria"));
                 insc.setIdInscripcion(rs.getInt("idInscripto"));
-                insc.setAlumno(nombre);
+                insc.setAlumno(alumno);
                 insc.setMateria(materia);
                 insc.setNota(rs.getDouble("nota"));
                 inscripcion.add(insc);
@@ -182,21 +182,25 @@ public class InscripcionData {
 
        public List<Alumno> alumnosXmateria(int idMateria) {
            List<Alumno> AlumnosXmateria = new ArrayList<Alumno>();
-           String ListaSql = "select idAlumno from inscripcion  where idMateria=?";
-           AlumnoData aldat=new AlumnoData();
+           String ListaSql = "select * from alumno JOIN inscripcion ON (inscripcion.IdAlumno=alumno.IdAlumno) where inscripcion.IdMateria=?";
+      
         try {
             PreparedStatement ps=con.prepareStatement(ListaSql);
             ps.setInt(1, idMateria);
             ResultSet rs=ps.executeQuery();
-            Alumno nombre = aldat.buscarAlumno(rs.getInt("IdAlumno"));
-            nombre.setApellido(rs.getString("apellido"));
-            nombre.setNombre(rs.getString("nombre"));
-            nombre.setDni(rs.getInt("dni"));
-            nombre.setFechanac(rs.getDate("fechaNacimiento").toLocalDate());
-            nombre.setIdAlumno(rs.getInt("idAlumno"));
+            while (rs.next()) {
+            Alumno alumno =new Alumno();
+            alumno.setIdAlumno(rs.getInt("idAlumno"));
+            alumno.setApellido(rs.getString("apellido"));
+            alumno.setNombre(rs.getString("nombre"));
+            alumno.setDni(rs.getInt("dni"));
+            alumno.setFechanac(rs.getDate("fechaNacimiento").toLocalDate());
+            alumno.setEstadoA(rs.getBoolean("estado"));
             
-            AlumnosXmateria.add(nombre);
+            AlumnosXmateria.add(alumno);
+            }
             ps.close();
+            rs.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "error al acceder a la tabla inscripcion");
         }

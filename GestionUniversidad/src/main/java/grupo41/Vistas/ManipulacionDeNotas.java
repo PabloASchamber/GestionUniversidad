@@ -140,16 +140,15 @@ private void armarTabla(){
         
 
 private void cargarDatos(Alumno alumno){
+         jTable.getModel();
+         modelo.setRowCount(0);
+         jTable.repaint();
     InscripcionData indat =new InscripcionData();
         if(alumno!=null){
     ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
+    
     for (Inscripcion inscripcion : Inscripciones) {
-    System.out.println("ID Inscripción: " + inscripcion.getIdInscripcion());
-    System.out.println("Nombre Materia: " + inscripcion.getMateria().getNombre());
-    System.out.println("Nota: " + inscripcion.getNota());
         modelo.addRow(new Object []{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
-        jTable.validate();
-        jTable.repaint();
     }
     }
 }
