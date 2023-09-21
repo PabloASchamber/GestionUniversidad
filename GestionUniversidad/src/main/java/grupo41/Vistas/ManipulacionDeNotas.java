@@ -33,6 +33,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("seleccione un alumno");
 
+        jCB_alumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCB_alumnoMouseClicked(evt);
+            }
+        });
         jCB_alumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCB_alumnoActionPerformed(evt);
@@ -143,7 +148,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
         if (jCB_alumno.getSelectedItem() != null) {
             Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
-            cargarDatos(alumno);
+            this.cargarDatos(alumno);
             System.out.println(alumno);
         }
 
@@ -162,6 +167,17 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jTableMouseClicked
+
+    private void jCB_alumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCB_alumnoMouseClicked
+           if (jCB_alumno.getSelectedItem() != null) {
+            Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
+            this.cargarDatos(alumno);
+            System.out.println(alumno);
+        }
+
+                                            
+
+    }//GEN-LAST:event_jCB_alumnoMouseClicked
     private void CargarCombo() {
         AlumnoData aldat = new AlumnoData();
         ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
@@ -180,17 +196,21 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void cargarDatos(Alumno alumno) {
         jTable.getModel();
+        int i= 0;
         modelo.setRowCount(0);
         InscripcionData indat = new InscripcionData();
-        if (alumno != null) {
-            ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
+        System.out.println("antes del if"+alumno);
+//        if (alumno != null) {
+//            ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) 
 
-            for (Inscripcion inscripcion : Inscripciones) {
+            for (Inscripcion inscripcion : indat.listaInscripcionesPorAlumno(alumno.getIdAlumno())) {
                 modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+                System.out.println("contador:"+i);
+                i++;
             }
             jTable.repaint();
 
-        }
+//        }
     }
 
 
