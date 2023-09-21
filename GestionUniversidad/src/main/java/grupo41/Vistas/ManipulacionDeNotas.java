@@ -1,13 +1,13 @@
-
 package grupo41.Vistas;
 
 import grupo41.AccesoADatos.AlumnoData;
 import grupo41.AccesoADatos.InscripcionData;
+import grupo41.AccesoADatos.MateriaData;
 import grupo41.Entidades.Alumno;
 import grupo41.Entidades.Inscripcion;
+import grupo41.Entidades.Materia;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-
 
 public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
@@ -16,7 +16,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         CargarCombo();
         armarTabla();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,6 +45,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 jB_GuardarMouseClicked(evt);
             }
         });
+        jB_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_GuardarActionPerformed(evt);
+            }
+        });
 
         jB_Salir.setText("Salir");
         jB_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +75,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable);
@@ -127,47 +136,62 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_GuardarMouseClicked
-       InscripcionData indat=new InscripcionData();
-       //indat.ActualizarNota();
+        InscripcionData indat = new InscripcionData();
+        //indat.ActualizarNota();
     }//GEN-LAST:event_jB_GuardarMouseClicked
 
     private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
-    if(jCB_alumno.getSelectedItem()!=null){
-    Alumno alumno= (Alumno) jCB_alumno.getSelectedItem();
-     cargarDatos(alumno);
-        System.out.println(alumno);
-    }
-    
-    }//GEN-LAST:event_jCB_alumnoActionPerformed
-private void CargarCombo(){
-    AlumnoData aldat = new AlumnoData();
-     ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
-     for (Alumno alumno : alumnos) {
-       jCB_alumno.addItem(alumno);
-    }
-}
-private DefaultTableModel modelo =new DefaultTableModel();
-private void armarTabla(){
-    modelo.addColumn("Codigo");
-    modelo.addColumn("nombre");
-    modelo.addColumn("Nota");
-    jTable.setModel(modelo);
-}
-        
+        if (jCB_alumno.getSelectedItem() != null) {
+            Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
+            cargarDatos(alumno);
+            System.out.println(alumno);
+        }
 
-private void cargarDatos(Alumno alumno){
-          jTable.getModel();
-         modelo.setRowCount(0);
-    InscripcionData indat =new InscripcionData();
-        if(alumno!=null){
-    ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
-    
-    for (Inscripcion inscripcion : Inscripciones) {
-        modelo.addRow(new Object []{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+    }//GEN-LAST:event_jCB_alumnoActionPerformed
+
+    private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
+        InscripcionData insdat = new InscripcionData();
+        insdat.ActualizarNota(1, 1, nota);
+
+    }//GEN-LAST:event_jB_GuardarActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        int filaS = jTable.getSelectedRow();
+        if (filaS != -1) {
+            double nota = (Double) jTable.getValueAt(filaS, 0);
+
+        }
+    }//GEN-LAST:event_jTableMouseClicked
+    private void CargarCombo() {
+        AlumnoData aldat = new AlumnoData();
+        ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
+        for (Alumno alumno : alumnos) {
+            jCB_alumno.addItem(alumno);
+        }
     }
-    jTable.repaint();
+    private DefaultTableModel modelo = new DefaultTableModel();
+
+    private void armarTabla() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("nombre");
+        modelo.addColumn("Nota");
+        jTable.setModel(modelo);
     }
-}
+
+    private void cargarDatos(Alumno alumno) {
+        jTable.getModel();
+        modelo.setRowCount(0);
+        InscripcionData indat = new InscripcionData();
+        if (alumno != null) {
+            ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(alumno.getIdAlumno());
+
+            for (Inscripcion inscripcion : Inscripciones) {
+                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+            }
+            jTable.repaint();
+
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

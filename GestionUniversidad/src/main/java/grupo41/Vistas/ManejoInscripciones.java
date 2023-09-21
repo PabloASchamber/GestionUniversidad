@@ -2,7 +2,9 @@ package grupo41.Vistas;
 
 import grupo41.AccesoADatos.AlumnoData;
 import grupo41.AccesoADatos.InscripcionData;
+import grupo41.AccesoADatos.MateriaData;
 import grupo41.Entidades.Alumno;
+import grupo41.Entidades.Inscripcion;
 import grupo41.Entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +78,19 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jB_inscribir.setText("Inscribir");
+        jB_inscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_inscribirActionPerformed(evt);
+            }
+        });
 
         jB_anularInsc.setText("Anular inscripcion");
 
@@ -161,6 +173,30 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private void jB_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_salirMouseClicked
         dispose();
     }//GEN-LAST:event_jB_salirMouseClicked
+
+    private void jB_inscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_inscribirActionPerformed
+        int filas = jTable1.getSelectedRow();
+        InscripcionData insdat = new InscripcionData();
+        if (filas != -1 && jRB_materiasNOinsc.isSelected()) {
+            Alumno alumno = (Alumno) jCB_alumnos.getSelectedItem();
+            Materia materia = jTable1.getSelectedRow();
+            Inscripcion inscripcion = new Inscripcion(alumno,);
+
+        }
+
+
+    }//GEN-LAST:event_jB_inscribirActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int filaS = jTable1.getSelectedRow();
+        if (filaS != -1) {
+            int id = (Integer) jTable1.getValueAt(filaS, 0);
+           MateriaData matdat = new MateriaData();
+          Materia materia= matdat.buscarMateria(id);
+         
+        }
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void cargarCombo() {
 
