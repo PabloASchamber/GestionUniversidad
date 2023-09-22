@@ -67,7 +67,7 @@ public class InscripcionData {
 
     public List<Inscripcion> listaInscripcionesPorAlumno(int id) {
         ArrayList<Inscripcion> inscripcion = new ArrayList<Inscripcion>();
-        String ListaSql = "SELECT * FROM `inscripcion` WHERE idAlumno =1; ";
+        String ListaSql = "SELECT * FROM inscripcion WHERE idAlumno =?; ";
         AlumnoData aldat = new AlumnoData();
         MateriaData matdat = new MateriaData();
 

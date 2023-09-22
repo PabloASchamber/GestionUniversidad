@@ -165,7 +165,7 @@ Materia materia=new Materia();
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         int filaS = jTable.getSelectedRow();
         if (filaS != -1) {
-        double nota = (Double) jTable.getValueAt(filaS, 3);
+        double nota = (Double) jTable.getValueAt(filaS, 2);
         int id= (int) jTable.getValueAt(filaS, 0);
         InscripcionData insdat = new InscripcionData();
         nuevaNota= insdat.buscarInscripcion(id);
@@ -200,16 +200,16 @@ Materia materia=new Materia();
         jTable.setModel(modelo);
     }
 
-    private void cargarDatos(Alumno alumno) {
+    private void cargarDatos(Alumno a) {
         jTable.getModel();
         int i= 0;
         modelo.setRowCount(0);
         InscripcionData indat = new InscripcionData();
-        System.out.println("antes del if"+alumno);
+        System.out.println("antes del if"+a);
 //        if (alumno != null) {
 //            ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) 
 
-            for (Inscripcion inscripcion : indat.listaInscripcionesPorAlumno(alumno.getIdAlumno())) {
+            for (Inscripcion inscripcion : indat.listaInscripcionesPorAlumno(a.getIdAlumno())) {
                 modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
                 System.out.println("contador:"+i);
                 i++;
