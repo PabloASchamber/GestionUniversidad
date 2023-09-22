@@ -159,7 +159,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         int filaS = jTable.getSelectedRow();
         if (filaS != -1) {
             int nota = Integer.parseInt((String) jTable.getValueAt(filaS, 2));
-            int id = Integer.parseInt((String) jTable.getValueAt(filaS, 0));
+            int id = (Integer) jTable.getValueAt(filaS, 0);
             InscripcionData insdt = new InscripcionData();
             Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
             Inscripcion nuevaNota = insdt.buscarInscripcion(id);

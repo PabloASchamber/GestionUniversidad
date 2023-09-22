@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class ConexionBD {
        private static final String bd = "ulp";
-       private static final String url = "jdbc:mariadb://localhost:3306/";
+       private static final String url = "jdbc:mariadb://localhost:3307/";
        private static final String usuario = "root";
        private static final String pass = "";
        private static final String driver = "org.mariadb.jdbc.Driver";
