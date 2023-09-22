@@ -12,7 +12,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     public ManipulacionDeNotas() {
         initComponents();
-        CargarCombo();
+       CargarCombo();
         armarTabla();
     }
 
@@ -140,15 +140,14 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_SalirActionPerformed
 
     private void jB_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_GuardarMouseClicked
-        InscripcionData indat = new InscripcionData();
-        //indat.ActualizarNota();
+
     }//GEN-LAST:event_jB_GuardarMouseClicked
 
     private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
         if (jCB_alumno.getSelectedItem() != null) {
-            alumno = (Alumno) jCB_alumno.getSelectedItem();
-            this.cargarDatos(alumno);
-            System.out.println(alumno);
+            Alumno alum = (Alumno) jCB_alumno.getSelectedItem();
+            cargarDatos(alumno);
+            System.out.println(alum);
         }
 
     }//GEN-LAST:event_jCB_alumnoActionPerformed
@@ -168,6 +167,7 @@ Materia materia=new Materia();
         double nota = (Double) jTable.getValueAt(filaS, 2);
         int id= (int) jTable.getValueAt(filaS, 0);
         InscripcionData insdat = new InscripcionData();
+        alumno=(Alumno) jCB_alumno.getSelectedItem();
         nuevaNota= insdat.buscarInscripcion(id);
         materia=nuevaNota.getMateria();
          nuevaNota=new Inscripcion(alumno, materia, nota);
@@ -176,19 +176,17 @@ Materia materia=new Materia();
 
     private void jCB_alumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCB_alumnoMouseClicked
            if (jCB_alumno.getSelectedItem() != null) {
-            Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
-            this.cargarDatos(alumno);
-            System.out.println(alumno);
-        }
-
-                                            
-
+            Alumno a = (Alumno) jCB_alumno.getSelectedItem();
+            this.cargarDatos(a);
+            System.out.println(a);
+        }                                  
     }//GEN-LAST:event_jCB_alumnoMouseClicked
+    
     private void CargarCombo() {
         AlumnoData aldat = new AlumnoData();
         ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
-        for (Alumno alumno : alumnos) {
-            jCB_alumno.addItem(alumno);
+        for (Alumno al : alumnos) {
+            jCB_alumno.addItem(al);
         }
     }
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -206,17 +204,17 @@ Materia materia=new Materia();
         modelo.setRowCount(0);
         InscripcionData indat = new InscripcionData();
         System.out.println("antes del if"+a);
-//        if (alumno != null) {
-//            ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) 
+        if (a != null) {
+         ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) indat.listaInscripcionesPorAlumno(a.getIdAlumno());
 
-            for (Inscripcion inscripcion : indat.listaInscripcionesPorAlumno(a.getIdAlumno())) {
+            for (Inscripcion inscripcion : Inscripciones) {
                 modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
                 System.out.println("contador:"+i);
                 i++;
             }
             jTable.repaint();
 
-//        }
+        }
     }
 
 

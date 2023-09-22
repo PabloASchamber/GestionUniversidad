@@ -212,6 +212,7 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(Sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+             if (rs.next()) { 
                 Alumno alumno = aldat.buscarAlumno(rs.getInt("IdAlumno"));
                 Materia materia = matdat.buscarMateria(rs.getInt("idMateria"));
                 insc.setIdInscripcion(rs.getInt("idInscripto"));
@@ -220,7 +221,7 @@ public class InscripcionData {
                 insc.setNota(rs.getDouble("nota"));
                 ps.close();
                 rs.close();
-            
+             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla inscripcion");
         }
