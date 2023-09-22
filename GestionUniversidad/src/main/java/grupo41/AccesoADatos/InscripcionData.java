@@ -202,5 +202,30 @@ public class InscripcionData {
         return AlumnosXmateria;
 
     }
+    
+    public Inscripcion buscarInscripcion(int id){
+        String Sql = "select * from inscripcion where Idinscripto=?";
+        Inscripcion insc = new Inscripcion();
+        AlumnoData aldat=new AlumnoData();
+        MateriaData matdat=new MateriaData();
+         try {
+            PreparedStatement ps = con.prepareStatement(Sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+                Alumno alumno = aldat.buscarAlumno(rs.getInt("IdAlumno"));
+                Materia materia = matdat.buscarMateria(rs.getInt("idMateria"));
+                insc.setIdInscripcion(rs.getInt("idInscripto"));
+                insc.setAlumno(alumno);
+                insc.setMateria(materia);
+                insc.setNota(rs.getDouble("nota"));
+                ps.close();
+                rs.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla inscripcion");
+        }
+        return insc;
+        
+    }
 
 }

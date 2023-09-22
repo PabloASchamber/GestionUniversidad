@@ -2,7 +2,6 @@ package grupo41.Vistas;
 
 import grupo41.AccesoADatos.AlumnoData;
 import grupo41.AccesoADatos.InscripcionData;
-import grupo41.AccesoADatos.MateriaData;
 import grupo41.Entidades.Alumno;
 import grupo41.Entidades.Inscripcion;
 import grupo41.Entidades.Materia;
@@ -147,7 +146,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
         if (jCB_alumno.getSelectedItem() != null) {
-            Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
+            alumno = (Alumno) jCB_alumno.getSelectedItem();
             this.cargarDatos(alumno);
             System.out.println(alumno);
         }
@@ -156,15 +155,22 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
         InscripcionData insdat = new InscripcionData();
-        insdat.ActualizarNota(1, 1, nota);
+        insdat.ActualizarNota(nuevaNota.getMateria().getIdMateria(),nuevaNota.getAlumno().getIdAlumno() , nuevaNota.getNota());
 
     }//GEN-LAST:event_jB_GuardarActionPerformed
+Inscripcion nuevaNota=new Inscripcion();
+Alumno alumno=new Alumno();
+Materia materia=new Materia();
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         int filaS = jTable.getSelectedRow();
         if (filaS != -1) {
-            double nota = (Double) jTable.getValueAt(filaS, 0);
-
+        double nota = (Double) jTable.getValueAt(filaS, 3);
+        int id= (int) jTable.getValueAt(filaS, 0);
+        InscripcionData insdat = new InscripcionData();
+        nuevaNota= insdat.buscarInscripcion(id);
+        materia=nuevaNota.getMateria();
+         nuevaNota=new Inscripcion(alumno, materia, nota);
         }
     }//GEN-LAST:event_jTableMouseClicked
 

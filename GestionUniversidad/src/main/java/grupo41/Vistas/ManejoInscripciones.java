@@ -93,6 +93,11 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         });
 
         jB_anularInsc.setText("Anular inscripcion");
+        jB_anularInsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_anularInscActionPerformed(evt);
+            }
+        });
 
         jB_salir.setText("Salir");
         jB_salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,27 +184,32 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         InscripcionData insdat = new InscripcionData();
         if (filas != -1 && jRB_materiasNOinsc.isSelected()) {
             Alumno alumno = (Alumno) jCB_alumnos.getSelectedItem();
-            Materia materia = jTable1.getSelectedRow();
-            Inscripcion inscripcion = new Inscripcion(alumno,);
-
+         Inscripcion insc = new Inscripcion(alumno, mat);
+        insdat.guardarInscripcion(insc);
         }
-
-
     }//GEN-LAST:event_jB_inscribirActionPerformed
+
+    Materia mat = new Materia();
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int filaS = jTable1.getSelectedRow();
         if (filaS != -1) {
             int id = (Integer) jTable1.getValueAt(filaS, 0);
            MateriaData matdat = new MateriaData();
-          Materia materia= matdat.buscarMateria(id);
-         
+           mat = matdat.buscarMateria(id);
         }
-
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void cargarCombo() {
+    private void jB_anularInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_anularInscActionPerformed
+         int filas = jTable1.getSelectedRow();
+        InscripcionData insdat = new InscripcionData();
+        if (filas != -1 && jRB_materiasNOinsc.isSelected()) {
+        Alumno alumno = (Alumno) jCB_alumnos.getSelectedItem();
+        insdat.BorrarInscripcionMateriaAlumno(mat.getIdMateria(), alumno.getIdAlumno());
+        }
+    }//GEN-LAST:event_jB_anularInscActionPerformed
 
+    private void cargarCombo() {
         AlumnoData aldat = new AlumnoData();
         ArrayList<Alumno> alumnos = (ArrayList<Alumno>) aldat.ListarAlumno();
         for (Alumno alumno : alumnos) {
@@ -228,23 +238,19 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
             for (Materia materia : materias) {
                 modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnioMateria()});
-
             }
-
         }
-
         if (alumno != null && jRB_materiasNOinsc.isSelected()) {
             List<Materia> materias = indat.ListaMateriasNoCursadas(alumno.getIdAlumno());
 
             for (Materia materia : materias) {
                 modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnioMateria()});
-
             }
-
         }
-
     }
 
+  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_anularInsc;
