@@ -156,9 +156,10 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
         InscripcionData insdat = new InscripcionData();
+        
         int filaS = jTable.getSelectedRow();
-        if (filaS != -1) {
-            int nota = Integer.parseInt((String) jTable.getValueAt(filaS, 2));
+         double nota = (Double)  jTable.getValueAt(filaS, 2);
+        if (filaS != -1 && nota>=1||nota<=10) {
             int id = (Integer) jTable.getValueAt(filaS, 0);
             InscripcionData insdt = new InscripcionData();
             Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();

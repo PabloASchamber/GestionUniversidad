@@ -159,11 +159,11 @@ public class InscripcionData {
         }
     }
 
-    public void ActualizarNota(int idMateria, int idAlumno, int nota) {
+    public void ActualizarNota(int idMateria, int idAlumno, double nota) {
         String sqlNota = "update inscripcion  set nota = ? where idalumno=? and idMateria=?";
         try {
             PreparedStatement ps = con.prepareStatement(sqlNota);
-            ps.setInt(1, nota);
+            ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
             ps.setInt(3, idMateria);
             int filas = ps.executeUpdate();
