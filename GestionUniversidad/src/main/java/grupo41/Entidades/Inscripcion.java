@@ -5,12 +5,12 @@ public class Inscripcion {
     private int IdInscripcion;
     private Alumno alumno;
     private Materia materia;
-    double nota;
+    int nota;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Alumno alumno, Materia materia, double nota) {
+    public Inscripcion(Alumno alumno, Materia materia, int nota) {
         this.alumno = alumno;
         this.materia = materia;
         this.nota =  nota;
@@ -23,7 +23,7 @@ public class Inscripcion {
         
     }
 
-    public Inscripcion(int IdInscripcion, Alumno alumno, Materia materia, double nota) {
+    public Inscripcion(int IdInscripcion, Alumno alumno, Materia materia, int nota) {
         this.IdInscripcion = IdInscripcion;
         this.alumno = alumno;
         this.materia = materia;
@@ -54,11 +54,11 @@ public class Inscripcion {
         this.materia = materia;
     }
 
-    public double getNota() {
+    public int getNota() {
         return nota;
     }
 
-    public void setNota(double nota) {
+    public void setNota(int nota) {
         this.nota = nota;
     }
 

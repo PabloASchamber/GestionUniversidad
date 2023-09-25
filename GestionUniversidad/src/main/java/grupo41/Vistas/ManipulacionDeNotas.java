@@ -161,16 +161,25 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
         InscripcionData insdat = new InscripcionData();
         int filaS = jTable.getSelectedRow();
-        double nota = (Double)  jTable.getValueAt(filaS, 2);
+        int nota;
+try {
+    String notaStr = (String) jTable.getValueAt(filaS, 2);
+    nota = Integer.parseInt(notaStr);
+    System.out.println(nota);
+} catch (NumberFormatException e) {
+    System.out.println("nota no valida");
+    nota = 0;
+}
+        //int nota = (Integer)  jTable.getValueAt(filaS, 2);
         
-        if (filaS != -1 && nota>=1||nota<=10) {
+        if (filaS != -1) {
             int id = (Integer) jTable.getValueAt(filaS, 0);
             InscripcionData insdt = new InscripcionData();
             Alumno alumno = (Alumno) jCB_alumno.getSelectedItem();
             Inscripcion nuevaNota = insdt.buscarInscripcion(id);
             Materia materia = nuevaNota.getMateria();
             nuevaNota = new Inscripcion(alumno, materia, nota);
-            insdat.ActualizarNota(nuevaNota.getMateria().getIdMateria(), nuevaNota.getAlumno().getIdAlumno(), nota);
+            insdat.ActualizarNota(nuevaNota.getMateria().getIdMateria(), alumno.getIdAlumno(), nota);
         }
     }//GEN-LAST:event_jB_GuardarActionPerformed
 
@@ -214,8 +223,12 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
             ArrayList<Inscripcion> Inscripciones = (ArrayList<Inscripcion>) idat.listaInscripcionesPorAlumno(a.getIdAlumno());
             System.out.println("despues  del if" + a);
             for (Inscripcion inscripcion : Inscripciones) {
-                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+                if(inscripcion.getNota()==0){
+                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), "sin nota"});
                 System.out.println("en el for" + a);
+                }else{
+                modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+                }
 
             }
             jTable.repaint();

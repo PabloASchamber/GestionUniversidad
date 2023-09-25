@@ -2,10 +2,7 @@
 package grupo41;
 
 import grupo41.AccesoADatos.ConexionBD;
-import grupo41.AccesoADatos.InscripcionData;
-import grupo41.Entidades.Inscripcion;
 import java.sql.Connection;
-import java.util.ArrayList;
 
 public class MainGrupo41 {
     

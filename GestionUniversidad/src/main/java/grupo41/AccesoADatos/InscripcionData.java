@@ -27,7 +27,7 @@ public class InscripcionData {
         String sqlInscripcion = "insert into inscripcion(nota, idAlumno, idMateria)values(?, ?, ? ) ";
         try {
             PreparedStatement ps = con.prepareStatement(sqlInscripcion, Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, insc.getNota());
+            ps.setInt(1,  insc.getNota());
             ps.setInt(2, insc.getAlumno().getIdAlumno());
             ps.setInt(3, insc.getMateria().getIdMateria());
             ps.executeUpdate();
@@ -159,11 +159,11 @@ public class InscripcionData {
         }
     }
 
-    public void ActualizarNota(int idMateria, int idAlumno, double nota) {
+    public void ActualizarNota(int idMateria, int idAlumno, int nota) {
         String sqlNota = "update inscripcion  set nota = ? where idalumno=? and idMateria=?";
         try {
             PreparedStatement ps = con.prepareStatement(sqlNota);
-            ps.setDouble(1, nota);
+            ps.setInt(1, nota);
             ps.setInt(2, idAlumno);
             ps.setInt(3, idMateria);
             int filas = ps.executeUpdate();

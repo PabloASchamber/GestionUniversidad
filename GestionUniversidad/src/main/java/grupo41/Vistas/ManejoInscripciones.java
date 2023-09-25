@@ -184,8 +184,9 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         InscripcionData insdat = new InscripcionData();
         if (filas != -1 && jRB_materiasNOinsc.isSelected()) {
             Alumno alumno = (Alumno) jCB_alumnos.getSelectedItem();
-         Inscripcion insc = new Inscripcion(alumno, mat);
+         Inscripcion insc = new Inscripcion(alumno, mat,0);
         insdat.guardarInscripcion(insc);
+           jTable1.repaint();
         }
     }//GEN-LAST:event_jB_inscribirActionPerformed
 
@@ -209,6 +210,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) jCB_alumnos.getSelectedItem();
         insdat.BorrarInscripcionMateriaAlumno(mat.getIdMateria(), alumno.getIdAlumno());
         }
+            jTable1.repaint();
     }//GEN-LAST:event_jB_anularInscActionPerformed
 
     private void cargarCombo() {
