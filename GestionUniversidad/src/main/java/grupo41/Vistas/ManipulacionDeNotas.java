@@ -151,14 +151,18 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_GuardarMouseClicked
 
     private void jCB_alumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_alumnoActionPerformed
-
+           if (jCB_alumno.getSelectedItem() != null) {
+            Alumno a = (Alumno) jCB_alumno.getSelectedItem();
+            cargarDatos(a);
+            System.out.println(a);
+        }
     }//GEN-LAST:event_jCB_alumnoActionPerformed
 
     private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
         InscripcionData insdat = new InscripcionData();
-        
         int filaS = jTable.getSelectedRow();
-         double nota = (Double)  jTable.getValueAt(filaS, 2);
+        double nota = (Double)  jTable.getValueAt(filaS, 2);
+        
         if (filaS != -1 && nota>=1||nota<=10) {
             int id = (Integer) jTable.getValueAt(filaS, 0);
             InscripcionData insdt = new InscripcionData();
