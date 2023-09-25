@@ -55,7 +55,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="195" max="32767" attributes="0"/>
+              <EmptySpace pref="183" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,7 +84,7 @@
                   <Component id="jB_anularInsc" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jB_salir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace pref="108" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

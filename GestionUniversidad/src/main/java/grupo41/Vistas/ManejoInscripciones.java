@@ -8,6 +8,7 @@ import grupo41.Entidades.Inscripcion;
 import grupo41.Entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 
 public class ManejoInscripciones extends javax.swing.JInternalFrame {
@@ -16,6 +17,9 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         initComponents();
         cargarCombo();
         armarTabla();
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(jRB_materiasInsc);
+        buttonGroup.add(jRB_materiasNOinsc);
     }
 
     @SuppressWarnings("unchecked")
@@ -138,7 +142,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                                 .addGap(95, 95, 95)
                                 .addComponent(jB_salir))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +166,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                     .addComponent(jB_inscribir)
                     .addComponent(jB_anularInsc)
                     .addComponent(jB_salir))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,7 +194,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jB_inscribirActionPerformed
 
-   
+
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int filaS = jTable1.getSelectedRow();
