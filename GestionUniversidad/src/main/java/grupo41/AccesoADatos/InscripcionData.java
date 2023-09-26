@@ -33,7 +33,8 @@ public class InscripcionData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+               // "idInscripcion" les da error  (solo funciona en mi pc)
+                insc.setIdInscripcion(rs.getInt("insert_id"));
                 JOptionPane.showMessageDialog(null, "inscripcion correcta");
             }
             ps.close();
