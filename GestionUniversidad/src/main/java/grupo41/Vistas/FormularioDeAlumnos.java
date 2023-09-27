@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
 
@@ -183,17 +184,29 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRB_estadoActionPerformed
 
     private void jB_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_BuscarMouseClicked
-        AlumnoData alumno = new AlumnoData();
-        Integer dni = Integer.parseInt(jTF_dni.getText());
-        Alumno al = alumno.buscarAlumnoDni(dni);
-        jTF_apellido.setText(al.getApellido());
-        jTF_nombre.setText(al.getNombre());
-        LocalDate f = al.getFechanac();
-        Date d = Date.from(f.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        jDateChooser1.setDate(d);
-        if(al.isEstadoA()){
+ AlumnoData alumnoData = new AlumnoData();
+    String dniStr = jTF_dni.getText().trim();
+    Integer dni = null;
+    try {
+        dni = Integer.parseInt(dniStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El DNI debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    Alumno al = alumnoData.buscarAlumnoDni(dni);
+    if (al == null) {
+        System.out.println("alumno no existe");
+        return; 
+    }
+
+    jTF_apellido.setText(al.getApellido());
+    jTF_nombre.setText(al.getNombre());
+    LocalDate f = al.getFechanac();
+    Date d = Date.from(f.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    jDateChooser1.setDate(d);
+    if (al.isEstadoA()) {
         jRB_estado.setSelected(true);
-                }
+    }
     }//GEN-LAST:event_jB_BuscarMouseClicked
 
     private void jB_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_nuevoMouseClicked
@@ -205,24 +218,53 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_nuevoMouseClicked
 
     private void jB_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_guardarMouseClicked
-        AlumnoData alumno = new AlumnoData();
-        Integer dni = Integer.parseInt(jTF_dni.getText());
-        String apellido = jTF_apellido.getText();
-        String nombre = jTF_nombre.getText();
-        boolean estado = jRB_estado.isSelected();
-        LocalDate fecha = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Alumno a = new Alumno(dni, nombre, apellido, fecha, estado);
-        alumno.guardarAlumno(a);
-//        }
+    AlumnoData alumnoData = new AlumnoData();
+    String dniStr = jTF_dni.getText().trim();
+    Integer dni = null;
+    try {
+        dni = Integer.parseInt(dniStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El DNI debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+    String apellido = jTF_apellido.getText();
+    String nombre = jTF_nombre.getText();
+    boolean estado = jRB_estado.isSelected();
+    LocalDate fecha = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+    Alumno a = new Alumno(dni, nombre, apellido, fecha, estado);
+
+    try {
+        alumnoData.guardarAlumno(a);
+        System.out.println("guardado");
+    } catch (Exception ex) {
+        System.out.println("error al guardar");
+    }
     }//GEN-LAST:event_jB_guardarMouseClicked
 
     private void jB_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_eliminarMouseClicked
-        AlumnoData alumno = new AlumnoData();
-        Integer dni = Integer.parseInt(jTF_dni.getText());
-        Alumno al = alumno.buscarAlumnoDni(dni);
-        alumno.EliminarAlumno(al.getIdAlumno());
+      AlumnoData alumnoData = new AlumnoData();
+    String dniStr = jTF_dni.getText().trim();
+    Integer dni = null;
+    try {
+        dni = Integer.parseInt(dniStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El DNI debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
 
+    Alumno al = alumnoData.buscarAlumnoDni(dni);
 
+    if (al == null) {
+        JOptionPane.showMessageDialog(null, "No se encontró un alumno con el DNI especificado.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        alumnoData.EliminarAlumno(al.getIdAlumno());
+    } catch (Exception ex) {
+        System.out.println("error al eliminar");
+    }
     }//GEN-LAST:event_jB_eliminarMouseClicked
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed

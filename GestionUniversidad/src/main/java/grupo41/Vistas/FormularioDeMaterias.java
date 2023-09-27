@@ -243,12 +243,30 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_GuardarActionPerformed
 
     private void jB_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarActionPerformed
-        MateriaData matdat= new MateriaData();
-        Integer id= Integer.valueOf(jT_codigo.getText().trim());
-        Materia mat=matdat.buscarMateria(id);
-        jRB_estado.setSelected(true);
-        jTF_nombre.setText(mat.getNombre());
-        jTF_anio.setText(Integer.toString(mat.getAnioMateria()));
+      String codigoStr = jT_codigo.getText().trim();
+      Integer id = null;
+      MateriaData matdat = new MateriaData();
+      try {
+      id = Integer.valueOf(codigoStr);
+     } catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "El código debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    return; 
+}
+   Materia mat = null;
+try {
+    mat = matdat.buscarMateria(id);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al buscar la materia: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    return; 
+}
+if (mat == null) {
+    System.out.println("materia no existe");
+    return;
+}
+
+ jRB_estado.setSelected(true);
+ jTF_nombre.setText(mat.getNombre());
+ jTF_anio.setText(Integer.toString(mat.getAnioMateria()));
     }//GEN-LAST:event_jB_buscarActionPerformed
 
 
