@@ -6,6 +6,7 @@ import grupo41.Entidades.Alumno;
 import grupo41.Entidades.Inscripcion;
 import grupo41.Entidades.Materia;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
@@ -167,12 +168,12 @@ try {
     String notaStr = (String) jTable.getValueAt(filaS, 2);
     nota = Integer.parseInt(notaStr);
     if(nota <1 || nota > 10){
-        System.out.println("Nota invalida ");
+        JOptionPane.showMessageDialog(null, "error nota debe estar entre 1 y 10");
         return ;    
     }
     System.out.println(nota);
 } catch (NumberFormatException e) {
-    System.out.println("nota no valida");
+    JOptionPane.showMessageDialog(null, "error la nota debe ser un número");
     return ;
 }
         //int nota = (Integer)  jTable.getValueAt(filaS, 2);
