@@ -162,13 +162,18 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         InscripcionData insdat = new InscripcionData();
         int filaS = jTable.getSelectedRow();
         int nota;
+        
 try {
     String notaStr = (String) jTable.getValueAt(filaS, 2);
     nota = Integer.parseInt(notaStr);
+    if(nota <1 || nota > 10){
+        System.out.println("Nota invalida ");
+        return ;    
+    }
     System.out.println(nota);
 } catch (NumberFormatException e) {
     System.out.println("nota no valida");
-    nota = 0;
+    return ;
 }
         //int nota = (Integer)  jTable.getValueAt(filaS, 2);
         
