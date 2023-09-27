@@ -207,15 +207,6 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
     private void jB_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_guardarMouseClicked
         AlumnoData alumno = new AlumnoData();
         Integer dni = Integer.parseInt(jTF_dni.getText());
-//        Alumno al = alumno.buscarAlumnoDni(dni);
-//       if(al.isEstadoA()){
-//        String apellido = jTF_apellido.getText();
-//        String nombre = jTF_nombre.getText();
-//        boolean estado = jRB_estado.isSelected();
-//        LocalDate fecha = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        Alumno a = new Alumno(dni, nombre, apellido, fecha, estado);
-//        alumno.modificarAlumno(a);
-//        }else{
         String apellido = jTF_apellido.getText();
         String nombre = jTF_nombre.getText();
         boolean estado = jRB_estado.isSelected();

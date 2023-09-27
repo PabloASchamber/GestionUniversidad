@@ -3,6 +3,7 @@ package grupo41.Vistas;
 
 import grupo41.AccesoADatos.MateriaData;
 import grupo41.Entidades.Materia;
+import javax.swing.JOptionPane;
 
 public class FormularioDeMaterias extends javax.swing.JInternalFrame {
 
@@ -205,16 +206,40 @@ public class FormularioDeMaterias extends javax.swing.JInternalFrame {
 
     private void jB_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_eliminarMouseClicked
          MateriaData matdat=new MateriaData();
+         String codigo=jT_codigo.getText().trim();
+         Integer cd=null;
+         try{
+             cd=Integer.valueOf(codigo);
+         }catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El codigo debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
         matdat.eliminarMateria(Integer.parseInt(jT_codigo.getText()));
     }//GEN-LAST:event_jB_eliminarMouseClicked
 
     private void jB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarActionPerformed
-        MateriaData matdat=new MateriaData();
-        String nombre = jTF_nombre.getText();
-        Integer anio = Integer.valueOf(jTF_anio.getText());
-        boolean estado = jRB_estado.isSelected();
-        Materia mat = new Materia(anio, nombre, estado);
+     MateriaData matdat = new MateriaData();
+    String nombre = jTF_nombre.getText();
+    String anioStr = jTF_anio.getText();
+    
+    Integer anio = 0;
+    try {
+        anio = Integer.valueOf(anioStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El año debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    boolean estado = jRB_estado.isSelected();
+
+    Materia mat = new Materia(anio, nombre, estado);
+
+    try {
         matdat.GuardarMateria(mat);
+        JOptionPane.showMessageDialog(null, "Materia guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Error al guardar la materia: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_jB_GuardarActionPerformed
 
     private void jB_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_buscarActionPerformed
