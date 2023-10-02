@@ -11,7 +11,7 @@ public class MainGrupo41 {
 
         Connection cbd = ConexionBD.conectar();
         Vista inicio = new Vista();
-        
+        inicio.setVisible(true);
     }
 
 }
